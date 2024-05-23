@@ -1,6 +1,7 @@
 package com.example.examplemod.feature.entities.goals;
 
 import com.example.examplemod.feature.entities.AbstractProjectileShooterUnit;
+import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.ai.goal.Goal;
 import net.minecraft.world.entity.ai.util.DefaultRandomPos;
@@ -25,7 +26,7 @@ public class AttackLocationGoal extends Goal {
 
     @Nullable
     protected Vec3 getPosition() {
-        return DefaultRandomPos.getPos(this.mob, 10, 7);
+        return DefaultRandomPos.getPosTowards(this.mob, 10, 7, this.targetPosition, 0);
     }
 
     @Override

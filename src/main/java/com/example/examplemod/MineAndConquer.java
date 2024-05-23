@@ -2,6 +2,7 @@ package com.example.examplemod;
 
 import com.example.examplemod.client.renderer.BoomIllagerRenderer;
 import com.example.examplemod.client.renderer.ShooterGuardRenderer;
+import com.example.examplemod.feature.blocks.BlockRegistry;
 import com.example.examplemod.feature.entities.BoomIllager;
 import com.example.examplemod.feature.entities.EntityRegistry;
 import com.example.examplemod.feature.entities.ShooterGuard;
@@ -50,16 +51,12 @@ public class MineAndConquer
     public static final String MODID = "examplemod";
     // Directly reference a slf4j logger
     private static final Logger LOGGER = LogUtils.getLogger();
-    // Create a Deferred Register to hold Blocks which will all be registered under the "examplemod" namespace
-    public static final DeferredRegister.Blocks BLOCKS = DeferredRegister.createBlocks(MODID);
 
     // Create a Deferred Register to hold CreativeModeTabs which will all be registered under the "examplemod" namespace
     public static final DeferredRegister<CreativeModeTab> CREATIVE_MODE_TABS = DeferredRegister.create(Registries.CREATIVE_MODE_TAB, MODID);
 
-    // Creates a new Block with the id "examplemod:example_block", combining the namespace and path
-    public static final DeferredBlock<Block> EXAMPLE_BLOCK = BLOCKS.registerSimpleBlock("example_block", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
     // Creates a new BlockItem with the id "examplemod:example_block", combining the namespace and path
-    //public static final DeferredItem<BlockItem> EXAMPLE_BLOCK_ITEM = ITEMS.registerSimpleBlockItem("example_block", EXAMPLE_BLOCK);
+
 
     // Creates a new food item with the id "examplemod:example_id", nutrition 1 and saturation 2
 
@@ -79,11 +76,10 @@ public class MineAndConquer
         // Register the commonSetup method for modloading
         modEventBus.addListener(this::commonSetup);
 
-        // Register the Deferred Register to the mod event bus so blocks get registered
-        BLOCKS.register(modEventBus);
         // Register the Deferred Register to the mod event bus so tabs get registered
         CREATIVE_MODE_TABS.register(modEventBus);
 
+        BlockRegistry.BLOCKS.register(modEventBus);
         EntityRegistry.ENTITIES.register(modEventBus);
         MenuRegistry.MENUES.register(modEventBus);
         ItemRegistry.ITEMS.register(modEventBus);

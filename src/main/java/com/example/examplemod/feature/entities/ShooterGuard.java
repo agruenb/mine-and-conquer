@@ -38,12 +38,16 @@ public class ShooterGuard extends AbstractProjectileShooterUnit {
         return AbstractProjectileShooterUnit.createMobAttributes().add(Attributes.MOVEMENT_SPEED, 0.3D);
     }
 
+    public Vec3 getGuardLocation(){
+        return new Vec3(0,0,0);
+    }
+
     @Override
     protected void registerGoals() {
         super.registerGoals();
         this.goalSelector.addGoal(1, new RangedAttackGoal(this, 1D, 40, 15.0F));
         this.goalSelector.addGoal(2, new LookAtPlayerGoal(this, Player.class, 8.0F));
-        this.goalSelector.addGoal(3, new GuardLocationGoal(this, new Vec3(0,-61,0)));
+        this.goalSelector.addGoal(3, new GuardLocationGoal(this, this.getGuardLocation()));
         this.goalSelector.addGoal(4, new RandomLookAroundGoal(this));
 
         // Add custom target goal to attack all living entities except BoomIllager

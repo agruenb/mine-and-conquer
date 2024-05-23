@@ -42,13 +42,12 @@ public class BoomIllager extends AbstractProjectileShooterUnit {
     @Override
     protected void registerGoals() {
         super.registerGoals();
-        //this.goalSelector.addGoal(1, new RangedAttackGoal(this, 0.5D, 30, 15.0F));
-        //this.goalSelector.addGoal(2, new LookAtPlayerGoal(this, Player.class, 8.0F));
-        this.goalSelector.addGoal(3, new AttackLocationGoal(this, new Vec3(0,-61,0)));
+        this.goalSelector.addGoal(1, new RangedAttackGoal(this, 0.5D, 30, 15.0F));
+        this.goalSelector.addGoal(3, new AttackLocationGoal(this, new Vec3(0,0,0)));
         //this.goalSelector.addGoal(4, new RandomLookAroundGoal(this));
 
         //this.targetSelector.removeGoal(goal -> goal instanceof NearestAttackableTargetGoal);
         // Add custom target goal to attack all living entities except BoomIllager
-        //this.targetSelector.addGoal(1, new NearestAttackableTargetGoal<>(this, LivingEntity.class, 10, true, false, this::shouldAttack));
+        this.targetSelector.addGoal(1, new NearestAttackableTargetGoal<>(this, LivingEntity.class, 10, true, false, this::shouldAttack));
     }
 }
