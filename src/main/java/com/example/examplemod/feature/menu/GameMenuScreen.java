@@ -1,5 +1,7 @@
 package com.example.examplemod.feature.menu;
 
+import com.example.examplemod.feature.entities.BoomIllager;
+import com.example.examplemod.feature.entities.EntityRegistry;
 import com.mojang.blaze3d.systems.RenderSystem;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
@@ -8,11 +10,13 @@ import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.network.chat.Component;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.phys.Vec3;
 
 import static com.example.examplemod.MineAndConquer.MODID;
 
 public class GameMenuScreen extends AbstractContainerScreen<GameMenu> {
-    private static final ResourceLocation BACKGROUND_TEXTURE = new ResourceLocation(MODID, "textures/entity/boom_illager.png");
+    private static final ResourceLocation BACKGROUND_TEXTURE = new ResourceLocation(MODID, "assets/examplemod/textures/entity/boom_illager.png");
 
     public GameMenuScreen(GameMenu menu, Inventory playerInv, Component title) {
         super(menu, playerInv, title);
@@ -37,6 +41,28 @@ public class GameMenuScreen extends AbstractContainerScreen<GameMenu> {
     private void onButton1Pressed() {
         // Handle button 1 action
         Minecraft.getInstance().player.sendSystemMessage(Component.literal("Button 1 Pressed"));
+        // Handle button 2 action
+        Minecraft mc = Minecraft.getInstance();
+
+        if (mc.level == null || mc.player == null) {
+            mc.player.sendSystemMessage(Component.literal("Failed to spawn BoomIllager: Invalid player or world context."));
+            return;
+        }
+        Level world = mc.player.level();
+        Vec3 position = mc.player.position();
+
+        if (world.isClientSide) {
+            mc.player.sendSystemMessage(Component.literal("Failed to spawn BoomIllager: World is clientside"));
+            return;
+        }
+        // Create the BoomIllager entity
+        BoomIllager boomIllager = new BoomIllager(EntityRegistry.BOOM_ILLAGER.get(), world); // Adjust EntityType to match your BoomIllager
+        boomIllager.setMacTeam(1);
+        // Set the position of the BoomIllager
+        boomIllager.setPos(position.x, position.y, position.z);
+
+        // Spawn the BoomIllager in the world
+        world.addFreshEntity(boomIllager);
     }
 
     private void onButton2Pressed() {

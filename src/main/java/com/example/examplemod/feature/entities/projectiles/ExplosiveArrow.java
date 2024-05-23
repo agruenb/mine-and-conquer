@@ -28,7 +28,7 @@ public class ExplosiveArrow extends Arrow {
     protected void onHitEntity(EntityHitResult result) {
         super.onHitEntity(result);
         if (!this.level.isClientSide) {
-            this.level.explode(this, this.getX(), this.getY(), this.getZ(), 1.0F, false, ExplosionInteraction.BLOW);
+            this.level.explode(this, this.getX(), this.getY(), this.getZ(), 1.0F, false, ExplosionInteraction.BLOCK);
             this.remove(RemovalReason.KILLED);
         }
     }
@@ -37,7 +37,7 @@ public class ExplosiveArrow extends Arrow {
     protected void onHit(HitResult pResult){
         super.onHit(pResult);
         if (!this.level.isClientSide) {
-            this.level.explode(this, this.getX(), this.getY(), this.getZ(), 1.0F, false, ExplosionInteraction.BLOW);
+            this.level.explode(this, this.getX(), this.getY(), this.getZ(), 1.0F, false, ExplosionInteraction.BLOCK);
             this.remove(RemovalReason.KILLED);
         }
     }

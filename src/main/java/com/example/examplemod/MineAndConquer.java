@@ -1,15 +1,13 @@
 package com.example.examplemod;
 
 import com.example.examplemod.client.renderer.BoomIllagerRenderer;
+import com.example.examplemod.client.renderer.ShooterGuardRenderer;
 import com.example.examplemod.feature.entities.BoomIllager;
 import com.example.examplemod.feature.entities.EntityRegistry;
+import com.example.examplemod.feature.entities.ShooterGuard;
 import com.example.examplemod.feature.items.ItemRegistry;
 import com.example.examplemod.feature.menu.GameMenuScreen;
 import com.example.examplemod.feature.menu.MenuRegistry;
-import net.minecraft.world.entity.SpawnPlacementType;
-import net.minecraft.world.entity.SpawnPlacementTypes;
-import net.minecraft.world.entity.SpawnPlacements;
-import net.minecraft.world.level.levelgen.Heightmap;
 import net.neoforged.neoforge.client.event.EntityRenderersEvent;
 import net.neoforged.neoforge.client.event.RegisterMenuScreensEvent;
 import net.neoforged.neoforge.event.entity.EntityAttributeCreationEvent;
@@ -22,11 +20,8 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
-import net.minecraft.world.food.FoodProperties;
-import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.CreativeModeTabs;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockBehaviour;
@@ -45,7 +40,6 @@ import net.neoforged.neoforge.event.BuildCreativeModeTabContentsEvent;
 import net.neoforged.neoforge.event.server.ServerStartingEvent;
 import net.neoforged.neoforge.registries.DeferredBlock;
 import net.neoforged.neoforge.registries.DeferredHolder;
-import net.neoforged.neoforge.registries.DeferredItem;
 import net.neoforged.neoforge.registries.DeferredRegister;
 
 // The value here should match an entry in the META-INF/neoforge.mods.toml file
@@ -148,6 +142,7 @@ public class MineAndConquer
         @SubscribeEvent
         public static void registerRenderers(EntityRenderersEvent.RegisterRenderers event){
             event.registerEntityRenderer(EntityRegistry.BOOM_ILLAGER.get(), BoomIllagerRenderer::new);
+            event.registerEntityRenderer(EntityRegistry.SHOOTER_GUARD.get(), ShooterGuardRenderer::new);
         }
         @SubscribeEvent
         public static void registerLayerDefinitions(EntityRenderersEvent.RegisterLayerDefinitions event){
@@ -157,10 +152,11 @@ public class MineAndConquer
         @SubscribeEvent
         public static void entityAttributes(EntityAttributeCreationEvent event){
             event.put(EntityRegistry.BOOM_ILLAGER.get(), BoomIllager.createAttributes().build());
+            event.put(EntityRegistry.SHOOTER_GUARD.get(), ShooterGuard.createAttributes().build());
         }
         @SubscribeEvent
         public static void registerSpawnLocations(SpawnPlacementRegisterEvent event){
-            event.register(EntityRegistry.BOOM_ILLAGER.get(), SpawnPlacementTypes.ON_GROUND, Heightmap.Types.WORLD_SURFACE, BoomIllager::canSpawn, SpawnPlacementRegisterEvent.Operation.OR);
+            //event.register(EntityRegistry.BOOM_ILLAGER.get(), SpawnPlacementTypes.ON_GROUND, Heightmap.Types.WORLD_SURFACE, BoomIllager::canSpawn, SpawnPlacementRegisterEvent.Operation.OR);
         }
         @SubscribeEvent
         private static void registerScreens(RegisterMenuScreensEvent event) {
