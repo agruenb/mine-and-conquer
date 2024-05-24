@@ -4,13 +4,12 @@ import com.example.examplemod.feature.entities.projectiles.ExplosiveArrow;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.PathfinderMob;
 import net.minecraft.world.entity.monster.RangedAttackMob;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 
-public abstract class AbstractProjectileShooterUnit extends MacTeamMember implements RangedAttackMob {
+public abstract class AbstractProjectileShooterUnit extends AbstractBasicUnit implements RangedAttackMob {
 
     public Level level;
     int inaccuracy = 10;

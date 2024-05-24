@@ -2,6 +2,7 @@ package com.example.examplemod;
 
 import com.example.examplemod.client.renderer.BoomIllagerRenderer;
 import com.example.examplemod.client.renderer.ShooterGuardRenderer;
+import com.example.examplemod.feature.MetaGame;
 import com.example.examplemod.feature.blocks.BlockRegistry;
 import com.example.examplemod.feature.entities.BoomIllager;
 import com.example.examplemod.feature.entities.EntityRegistry;
@@ -55,11 +56,6 @@ public class MineAndConquer
     // Create a Deferred Register to hold CreativeModeTabs which will all be registered under the "examplemod" namespace
     public static final DeferredRegister<CreativeModeTab> CREATIVE_MODE_TABS = DeferredRegister.create(Registries.CREATIVE_MODE_TAB, MODID);
 
-    // Creates a new BlockItem with the id "examplemod:example_block", combining the namespace and path
-
-
-    // Creates a new food item with the id "examplemod:example_id", nutrition 1 and saturation 2
-
     // Creates a creative tab with the id "examplemod:example_tab" for the example item, that is placed after the combat tab
     public static final DeferredHolder<CreativeModeTab, CreativeModeTab> EXAMPLE_TAB = CREATIVE_MODE_TABS.register("example_tab", () -> CreativeModeTab.builder()
             .title(Component.translatable("itemGroup.examplemod")) //The language key for the title of your CreativeModeTab
@@ -68,6 +64,8 @@ public class MineAndConquer
             .displayItems((parameters, output) -> {
                 output.accept(ItemRegistry.MENU_OPENER_ITEM.get()); // Add the example item to the tab. For your own tabs, this method is preferred over the event
             }).build());
+
+    public static final MetaGame metaGame = new MetaGame();
 
     // The constructor for the mod class is the first code that is run when your mod is loaded.
     // FML will recognize some parameter types like IEventBus or ModContainer and pass them in automatically.

@@ -1,9 +1,12 @@
 package com.example.examplemod.feature.blocks;
 
+import com.example.examplemod.MineAndConquer;
 import com.example.examplemod.feature.entities.EntityRegistry;
 import com.example.examplemod.feature.entities.ShooterGuard;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.resources.model.Material;
 import net.minecraft.core.BlockPos;
+import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
@@ -33,9 +36,13 @@ public class ShooterGuardBlock extends Block {
             ShooterGuard guard = EntityRegistry.SHOOTER_GUARD.get().create((ServerLevel) level);
             if (guard != null) {
                 guard.moveTo(pos.getX() + 0.5, pos.getY() + 1, pos.getZ() + 0.5, guard.getYRot(), guard.getXRot());
-                //guard.guardLocation = new Vec3(pos.getX() + 0.5, pos.getY(), pos.getZ() + 0.5);
+                guard.setGuardPosition(new Vec3(pos.getX() + 0.5, pos.getY() + 1, pos.getZ() + 0.5));
                 level.addFreshEntity(guard);
+                guard.wearHelmet();
             }
+            //testing
+            MineAndConquer.metaGame.setCombat(!MineAndConquer.metaGame.getCombat());
+            Minecraft.getInstance().player.sendSystemMessage(Component.literal(MineAndConquer.metaGame.getCombat()?"Combat!":"No Combat"));
         }
         super.setPlacedBy(level, pos, state, placer, stack);
     }

@@ -16,13 +16,13 @@ public class EntityRegistry {
 
     public static final DeferredHolder<EntityType<?>, EntityType<BoomIllager>> BOOM_ILLAGER = ENTITIES.register("boom_illager",
             () -> EntityType.Builder.<BoomIllager>of(BoomIllager::new, MobCategory.CREATURE)
-                    .sized(1.0f, 1.0f)
+                    .sized(1.0f, 2.0f)
                     .build(new ResourceLocation(MODID, "boom_illager").toString())
             );
 
     public static final DeferredHolder<EntityType<?>, EntityType<ShooterGuard>> SHOOTER_GUARD = ENTITIES.register("shooter_guard",
             () -> EntityType.Builder.<ShooterGuard>of(ShooterGuard::new, MobCategory.CREATURE)
-                    .sized(1.0f, 1.0f)
+                    .sized(1.0f, 2.0f)
                     .build(new ResourceLocation(MODID, "shooter_guard").toString())
     );
 

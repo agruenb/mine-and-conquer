@@ -1,5 +1,6 @@
 package com.example.examplemod.feature.entities.goals;
 
+import com.example.examplemod.MineAndConquer;
 import com.example.examplemod.feature.entities.AbstractProjectileShooterUnit;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.LivingEntity;
@@ -15,6 +16,8 @@ import javax.annotation.Nullable;
 import java.util.EnumSet;
 
 public class GuardLocationGoal extends Goal {
+
+    private final double guardModeSpeedModifier = 1.5;
     private final AbstractProjectileShooterUnit mob;
     private final Vec3 targetPosition;
 
@@ -30,11 +33,16 @@ public class GuardLocationGoal extends Goal {
 
     @Nullable
     protected Vec3 getPosition() {
-        return DefaultRandomPos.getPosTowards(this.mob, 2, 1, this.targetPosition, 0);//amplifier causes them to move around alot more
+        //amplifier causes them to move around alot more
+        //for p radius, range too small < 3 the entities can get stuck
+        return DefaultRandomPos.getPosTowards(this.mob, 3, 2, this.targetPosition, 0);
     }
 
     @Override
     public boolean canUse() {
+        if(!MineAndConquer.metaGame.getCombat()){
+            return false;
+        }
         Vec3 vec3 = this.getPosition();
         if (vec3 == null) {
             return false;
@@ -54,7 +62,7 @@ public class GuardLocationGoal extends Goal {
 
     @Override
     public void start() {
-        this.mob.getNavigation().moveTo(this.wantedX, this.wantedY, this.wantedZ, 1.0);
+        this.mob.getNavigation().moveTo(this.targetPosition.x, this.targetPosition.y, this.targetPosition.z, guardModeSpeedModifier);
     }
 
     @Override
