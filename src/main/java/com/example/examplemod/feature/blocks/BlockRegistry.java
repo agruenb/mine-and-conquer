@@ -16,9 +16,9 @@ import static com.example.examplemod.feature.items.ItemRegistry.ITEMS;
 public class BlockRegistry {
     public static final DeferredRegister.Blocks BLOCKS = DeferredRegister.createBlocks(MODID);
 
-    public static final DeferredBlock<Block> GUARD_SPAWN_BLOCK = BLOCKS.register("guard_spawn_block", ShooterGuardBlock::new);
+    public static final DeferredBlock<Block> GUARD_SPAWN_BLOCK = BLOCKS.register("shooter_guard_block", ShooterGuardBlock::new);
 
     public static final DeferredBlock<Block> EXAMPLE_BLOCK = BLOCKS.registerSimpleBlock("example_block", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
     public static final DeferredItem<BlockItem> EXAMPLE_BLOCK_ITEM = ITEMS.registerSimpleBlockItem("example_block", EXAMPLE_BLOCK);
-    public static final DeferredItem<BlockItem> GUARD_SPAWN_BLOCK_ITEM = ITEMS.registerSimpleBlockItem("guard_spawn_block_item", GUARD_SPAWN_BLOCK);
+    public static final DeferredItem<BlockItem> GUARD_SPAWN_BLOCK_ITEM = ITEMS.registerSimpleBlockItem("shooter_guard_block_item", GUARD_SPAWN_BLOCK);
 }

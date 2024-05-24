@@ -10,8 +10,6 @@ import net.minecraft.world.level.Level;
 
 public class AbstractBasicUnit extends MacTeamMember {
 
-    ItemStack ironHelmet = new ItemStack(Items.IRON_HELMET);
-
     public AbstractBasicUnit(EntityType<? extends PathfinderMob> type, Level pLevel) {
         super(type, pLevel);
     }

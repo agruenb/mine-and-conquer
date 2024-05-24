@@ -38,7 +38,6 @@ public class ShooterGuardBlock extends Block {
                 guard.moveTo(pos.getX() + 0.5, pos.getY() + 1, pos.getZ() + 0.5, guard.getYRot(), guard.getXRot());
                 guard.setGuardPosition(new Vec3(pos.getX() + 0.5, pos.getY() + 1, pos.getZ() + 0.5));
                 level.addFreshEntity(guard);
-                guard.wearHelmet();
             }
             //testing
             MineAndConquer.metaGame.setCombat(!MineAndConquer.metaGame.getCombat());
