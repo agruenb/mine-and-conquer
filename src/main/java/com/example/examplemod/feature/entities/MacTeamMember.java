@@ -17,7 +17,12 @@ public class MacTeamMember extends PathfinderMob {
         if (entity instanceof MacTeamMember) {
             return ((MacTeamMember) entity).getMacTeam() != this.getMacTeam();
         }
-        return true; // Attack entities that are not TeamMembers
+        return false; // Attack entities that are not TeamMembers
+    }
+
+    @Override
+    public void checkDespawn() {
+        // Prevents the entity from despawning
     }
 
     public int getMacTeam() {
